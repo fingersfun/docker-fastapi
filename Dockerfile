@@ -1,17 +1,17 @@
 FROM python:3.9.8
 
-COPY ./application ./application
+WORKDIR /app
 
-COPY ./cert/ ./cert
+EXPOSE 8000:8000
 
-COPY ./server.py ./server.py
+COPY ./requirements.txt .
 
-COPY ./requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-WORKDIR .
+COPY . .
 
-EXPOSE 9990:9990
+# CMD [ "python", "server.py" ]
 
-RUN pip install -r requirements.txt
-
-CMD [ "python", "server.py" ]
+#CMD ["uvicorn", "application.main:app", "--host", "0.0.0.0", "--port", "8800"]
+CMD [ "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" ]
+#CMD ["uvicorn", "application.main:app"]

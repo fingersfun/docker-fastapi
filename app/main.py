@@ -2,10 +2,10 @@
 # import typing and its modules
 from typing import Optional
 # Importing FastAPI
-#from fastapi import FastAPI
+from fastapi import FastAPI
 
-# app = FastAPI()  # Creating instance
-from application import app
+app = FastAPI()  # Creating instance
+# from app import app
 
 
 @app.get('/')
